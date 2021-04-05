@@ -4,6 +4,7 @@ import collections
 
 # 전략
 # 문자를 하나씩 받으면서 하나씩 크기를 비교해서 감소하는 순서이면 넘기고 증가하는 순서이면 계속 stack에 쌓자.
+# un solved
 
 def remove(s) : 
     stack = [] 

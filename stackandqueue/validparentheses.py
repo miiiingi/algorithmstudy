@@ -1,5 +1,6 @@
 # 문제
 # 괄호로 된 입력값이 올바른지 판별하라.
+# un solved 
 
 def parentheses(s) : 
     stack = [] 
