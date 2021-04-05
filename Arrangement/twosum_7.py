@@ -23,10 +23,22 @@ def sums2(nums, target) :
         for num2 in indexlist : 
             if diff == nums[num2] :
                 return [ind, num2]
-    pass
+
+def sums3(nums, target) : 
+    numlist = {}
+    for ind, num in enumerate(nums) : 
+        numlist[num] = ind
+    
+    for ind, num in enumerate(nums) : 
+        if (target - num) in numlist and ind != numlist[(target -num)]: 
+            return [ind , numlist[(target - num)]]
+
 nums = [2, 7, 11, 15]
 target = 9
 answer =sums(nums, target)
 answer2 = sums2(nums, target)
+answer3 = sums3(nums, target)
+
 print(answer)
 print(answer2)
+print(answer3)
