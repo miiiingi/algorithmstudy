@@ -1,0 +1,3 @@
+def longest(strings) : 
+    
+    pass
