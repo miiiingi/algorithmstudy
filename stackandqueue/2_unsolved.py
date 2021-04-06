@@ -3,16 +3,19 @@
 # un solved
 
 def solution(prices) : 
-    answer = [] 
+    stack = [] 
+    answer = [0 for _ in range(len(prices))] 
     for ind, price in enumerate(prices) : 
-        count = 0 
-        for price2 in prices[(ind+1): ] : 
-            if price <= price2 : 
-                count += 1 
-            else : 
-                count += 1
-                break
-        answer.append(count)
+        while stack and prices[stack[-1]] <= price : 
+            answer[stack[-1]] += 1
+        stack.append(ind)
+
+
     return answer
 answer = solution([1, 2, 3, 2, 3])
 print(answer)
+
+
+#(1,2,3,2,3)
+# stack < 1 push
+# 
