@@ -3,13 +3,16 @@
 # un solved
 
 def solution(prices) : 
-    stack = [] 
-    answer = [0 for _ in range(len(prices))] 
-    for ind, price in enumerate(prices) : 
-        while stack and prices[stack[-1]] > price : 
-            answer[stack[-1]] = (ind - stack[-1])
-            stack.pop()
-        stack.append(ind)
+    answer = [] 
+    for ind in range(len(prices)) :  # range를 이용해서 인덱스를 받아오도록 만들었고,
+        count = 0 
+        for price2 in prices[(ind+1): ] : # range
+            if prices[ind] <= price2 : 
+                count += 1 
+            else : 
+                count += 1
+                break
+        answer.append(count)
     return answer
 answer = solution([1, 2, 3, 2, 3])
 print(answer)
