@@ -1,6 +1,18 @@
 # 문제
 # 매일 화씨 온도 리스트 T를 입력받아서 더 따뜻한 날씨를 위해서는 며칠을 더 기다려야 하는지를 출력하라.
-# un solved
+# [73, 74, 75, 71, 69, 72, 76, 73]
+# [1, 1, 4, 2, 1, 1, 0, 0]
+def solution(prices) : 
+    answer = [0 for _ in range(len(prices))] 
+    for ind in range(0, len(prices)) : 
+        count = 0 
+        for ind2 in range(ind+1, len(prices)): 
+            count += 1 
+            if prices[ind] > prices[ind2] : 
+                break
+        answer[ind] = count
+    return answer
+
 import collections
 def daily(T) : 
     answer = [] 
@@ -48,10 +60,10 @@ def daily3(T) :
     return count
         
         
-
 answer = daily([89, 62, 70, 58, 47, 47, 46, 76, 100, 70])
 answer2 = daily2([73, 74, 75, 71, 69, 72, 76, 73])
 answer3 = daily3([73, 74, 75, 71, 69, 72, 76, 73])
 
+ans = solution([89, 62, 70, 58, 47, 47, 46, 76, 100, 70])
 # [1, 1, 4, 2, 1, 1, 0, 0]
-print(answer3)
+print(ans)
