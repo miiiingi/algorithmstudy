@@ -3,16 +3,14 @@
 # un solved
 
 def solution(prices) : 
-    answer = [] 
-    for ind in range(len(prices)) :  # range를 이용해서 인덱스를 받아오도록 만들었고,
+    answer = [0 for _ in range(len(prices))] 
+    for ind in range(0, len(prices)) : 
         count = 0 
-        for price2 in prices[(ind+1): ] : # range
-            if prices[ind] <= price2 : 
-                count += 1 
-            else : 
-                count += 1
+        for ind2 in range(ind+1, len(prices)): 
+            count += 1 
+            if prices[ind] > prices[ind2] : 
                 break
-        answer.append(count)
+        answer[ind] = count
     return answer
 answer = solution([1, 2, 3, 2, 3])
 print(answer)
