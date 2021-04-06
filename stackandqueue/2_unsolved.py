@@ -6,16 +6,10 @@ def solution(prices) :
     stack = [] 
     answer = [0 for _ in range(len(prices))] 
     for ind, price in enumerate(prices) : 
-        while stack and prices[stack[-1]] <= price : 
-            answer[stack[-1]] += 1
+        while stack and prices[stack[-1]] > price : 
+            answer[stack[-1]] = (ind - stack[-1])
+            stack.pop()
         stack.append(ind)
-
-
     return answer
 answer = solution([1, 2, 3, 2, 3])
 print(answer)
-
-
-#(1,2,3,2,3)
-# stack < 1 push
-# 
