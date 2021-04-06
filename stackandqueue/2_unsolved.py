@@ -4,6 +4,15 @@
 
 def solution(prices) : 
     answer = [] 
+    for ind, price in enumerate(prices) : 
+        count = 0 
+        for price2 in prices[(ind+1): ] : 
+            if price <= price2 : 
+                count += 1 
+            else : 
+                count += 1
+                break
+        answer.append(count)
     return answer
 answer = solution([1, 2, 3, 2, 3])
 print(answer)
