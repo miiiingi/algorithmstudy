@@ -1,3 +1,0 @@
-def star(n) : 
-    
-    pass
