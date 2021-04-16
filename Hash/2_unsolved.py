@@ -3,26 +3,14 @@
 
 import collections
 def solution(phone_book) : 
-    # phone_book = sorted(phone_book, key = lambda x : len(x)) 
     phone_book = collections.deque(phone_book)
     while phone_book : 
-        comp = phone_book.popleft()
-        for obj in range(len(phone_book)) :
-            if phone_book[obj][:len(comp)] == comp : 
+        comp = phone_book.popleft() #123
+        for obj in range(len(phone_book)) : #12
+            if phone_book[obj][:len(comp)] == comp or comp[:len(phone_book[obj])] == phone_book[obj] : 
                 return False 
     return True 
-def solution2(phone_book) : 
-    phone_books = {}
-    for ind , number in enumerate(phone_book) : 
-        phone_books[ind] = number 
-    print(list(phone_books.values()[:3]))
-    exit()
-    for i in range(len(phone_books)) :
-        comp = phone_books.pop(i)
-        if comp in list(phone_books.values())[:len(comp)] : 
-            return False
-    return True
-answer = solution2(['119','97674223','1195524421'])
-# answer = solution(['123','12'])
+# answer = solution(['119','97674223','1195524421'])
+answer = solution(['123','12'])
 
 print(answer)
