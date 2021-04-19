@@ -2,12 +2,16 @@
 # 2. 어떻게 탐색하면서 경우를 종료시킬 건지 생각해보기, 순서는 상관없나 ? , 어떻게 순서를 배당할 것 인가?
 def dfs(a, v, graph) : 
     count = 0 
+    candidate = [] 
     for w in graph[v] : 
+        candidate.append(w)
         if a[w] == 0 : 
             continue
         else : 
             condition_nonzero = True 
             while condition_nonzero : 
+                if a[v] != 0 and a[w] == 0 and a[candidate[-1]] == 0 : 
+                    pass
                 if a[v] == 0 or a[w] == 0 :
                     break
                 if a[v] < 0 :
