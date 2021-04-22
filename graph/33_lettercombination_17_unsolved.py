@@ -2,6 +2,7 @@ class Solution :
     def letterCombinations(self, digits) : 
         def dfs(index, path) :
             if len(path) == len(digits) :
+                # 한개가 붙는 경우는 마지막 밖에 없으니까 for 문이 의미없이 돌다가 끝남
                 result.append(path)
                 return
             for i in range(index, len(digits)) : 
