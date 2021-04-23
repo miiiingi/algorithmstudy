@@ -20,7 +20,7 @@ def apart(dangi) :
                 continue
             else : 
                 count = 0
-                nonlocal count 
+                # nonlocal count 
                 dfs(i, j)
                 houselist.append(count)
     return houselist
