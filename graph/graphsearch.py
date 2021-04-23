@@ -1,10 +1,3 @@
-for i in range(5) : 
-    for j in range(5) : 
-        if 1<=j<=3 : 
-            continue
-        print((i,j))
-exit()
-
 graph = {
     1: [2,3,4],
     2: [5],
