@@ -1,3 +1,9 @@
+V, E = map(int, input().split())
+K = int(input())
+time = [] 
+for iter in range(E) : 
+    u, v, w = map(int,input().split())
+    time.append([u, v, w])
 class Solution : 
     graph = {}
     count = [] 
@@ -24,11 +30,6 @@ class Solution :
                 self.count_max = [] 
             elif g < 0 : 
                 continue
-class Solution2 : 
-    def networkDelayTime(self, times, N, K) : 
-        pass
+answer = Solution().networkDelayTime(time, )
 
-# answer = Solution().networkDelayTime([[2,1,1],[2,3,1],[3,4,1], [1, 5, 3]], 5 ,2)
-answer = Solution().networkDelayTime([[1,2,1]], 2 ,1)
 
-print(answer)
