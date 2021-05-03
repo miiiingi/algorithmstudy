@@ -11,8 +11,7 @@ def solution(a, edges) :
                 if a[v] != 0 and a[e] == 0 :
                     continue
                 elif a[v] != 0 and a[e] != 0 : 
-
-        break
+                    pass
     return answer
 answer = solution([-5, 0, 2, 1, 2], [[0,1],[3,4],[2,3],[0,3]])
 print(answer)
