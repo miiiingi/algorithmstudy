@@ -5,6 +5,8 @@
 # 1. 단어가 같은 그룹인지를 구별
 # 2. 같은 그룹이라면 같은 그룹으로 묶일 수 있도록 정리
 
+# un solved
+
 def group(strings) : 
     strings_ = [''.join(sorted(x)) for x in strings]
     print(strings_)
