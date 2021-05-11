@@ -2,7 +2,6 @@
 import collections
 def solution(record) : 
     result = collections.defaultdict(str) 
-
     for rec in record : 
         _, uid, name = rec.split(' ')
         result[uid] = name
