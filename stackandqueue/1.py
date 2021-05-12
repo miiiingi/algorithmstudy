@@ -1,56 +1,31 @@
 import collections
 def solution(bridge_length, weight, truck_weights) : 
-    count_whole = 0
-    number_truck = len(truck_weights)
-    transiting = collections.deque([])
-    truck_weights = collections.deque(truck_weights)
-    truck_finish = []
-    while True :
-        if len(truck_weights) == 0 and len(truck_finish) == number_truck : 
+    time = 0
+    number_complete = len(truck_weights)
+    list_untransiting = collections.deque(truck_weights)
+    list_transiting = collections.deque([])
+    list_transited = collections.deque([])
+
+    while True : 
+        number_complete_truck = 0 
+        number_sumof_transiting = 0
+        if len(list_transited) == number_complete :  
             break
         else : 
-            if len(truck_weights) != 0 : 
-                if sum(item[1] for item in transiting) + truck_weights[0] <= weight : 
-                    truck = truck_weights.popleft()
-                    if transiting : 
-                        for number in range(len(transiting)) : 
-                            transiting[number][0] += 1
-                    transiting.append([1, truck])
-                    for number in range(len(transiting)) : 
-                        if transiting[number][0] >= bridge_length :
-                            truck_finish.append(transiting.popleft())
-                    count_whole += 1
+            time += 1
+            for transiting in list_transiting : 
+                if transiting[1] == bridge_length : 
+                    number_complete_truck += 1
+            for number_iter in range(number_complete_truck) : 
+                list_transited.append(list_transiting.popleft())
+            for transiting in list_transiting : 
+                number_sumof_transiting += transiting[0]
 
-                            # truck = truck_weights.popleft()
-                            # count_whole += 1
-                            # transiting.append([1, truck])
-                        # else : 
-                        #     transiting[number][0] += 1
-                        #     count_whole += 1
-                else : 
-                    # count_overbridge_length = 0
-                    for number in range(len(transiting)) : 
-                        if transiting[number][0] >= bridge_length :
-                            truck_finish.append(transiting.popleft())
-                            truck = truck_weights.popleft()
-                            count_whole += 1
-                            transiting.append([1, truck])
-                        else : 
-                            transiting[number][0] += 1
-                            count_whole += 1
-                    # for _ in range(count_overbridge_length) :   
-                    #     truck_finish.append(transiting.popleft())
-            else : 
-                    count_overbridge_length = 0
-                    for number in range(len(transiting)) : 
-                        if transiting[number][0] >= bridge_length :
-                            count_overbridge_length += 1
-                        else : 
-                            transiting[number][0] += 1
-                            count_whole += 1
-                    for _ in range(count_overbridge_length) :   
-                        truck_finish.append(transiting.popleft())
-    return count_whole
-
-answer = solution(2, 10, [7, 4, 5, 6])
+            if list_untransiting : 
+                if number_sumof_transiting + list_untransiting[0] <= weight : 
+                    list_transiting.append([list_untransiting.popleft(), 0])
+            for transiting in list_transiting : 
+                transiting[1] += 1
+    return time
+answer = solution(100, 100, [10 for _ in range(10)])
 print(answer)
