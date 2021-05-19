@@ -1,9 +1,10 @@
 # 어떤 걸 기준으로 먼저 시행해야 시간이 줄어들 수 있는지 생각해보자.
-# (이전작업종료시간-다음작업시작시간) + 다음작업걸리는시간 을 비교해서 짧은 걸 먼저 처리하자.
+# (이전작업종료시간- 다음작업시작시간) + 다음작업걸리는시간 을 비교해서 짧은 걸 먼저 처리하자.
 # 1. 작업이 걸리는 시간 기준 ? 
 # 2. 
 import collections
 def solution(jobs) : 
+    jobs = sorted(jobs, key = lambda x : x[0])
     jobs = collections.deque(jobs)
     current = [] 
     current_time = 1001 

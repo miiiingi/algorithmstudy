@@ -2,17 +2,14 @@ import collections
 import heapq
 V, E = map(int, input().split())
 K = int(input())
-time = [] 
+graph = collections.defaultdict(list)
 for iter in range(E) : 
     u, v, w = map(int,input().split())
-    time.append([u, v, w])
+    graph[u].append((v, w))
 class Solution : 
-    def networkDelayTime(self, time, k) : 
-        graph = collections.defaultdict(list)
+    def networkDelayTime(self, k) : 
         # node로 가는 최소비용이 들어있는 리스트
         dist = collections.defaultdict(int)
-        for u, v, w in time : 
-            graph[u].append((v, w))
         Q =[(k, 0)]
         while Q : 
             node, time = heapq.heappop(Q)
@@ -21,10 +18,8 @@ class Solution :
                 for v, w in graph[node] : 
                     time_cum = time + w
                     heapq.heappush(Q, (v, time_cum))
-            else : 
-                continue
         return dist
-answer = Solution().networkDelayTime(time, K)
+answer = Solution().networkDelayTime(K)
 for v in range(1, V+1) : 
     if v in answer : 
         print(answer[v])
