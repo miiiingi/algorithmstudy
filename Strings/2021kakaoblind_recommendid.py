@@ -1,8 +1,4 @@
 import re
-p = re.compile('.$')
-m = p.match('aa')
-print(m.group())
-exit()
 def solution(new_id) : 
     new_id = new_id.lower()
     new_id = re.sub('[^a-z0-9-_.]', '', new_id)
