@@ -6,6 +6,7 @@ check = []
 result = 0
 for row in range(N) : 
     graph.append(list(input()))
+    check.append(list([0 for _ in range(M)]))
 for i in range(N) : 
     for j in range(M) : 
         if graph[i][j] == '1' : 
@@ -51,6 +52,13 @@ def dfs(graph, i, j) :
         dfs(graph, i, j+1)
 
 def bfs(graph, i, j) : 
-    return
+    discovered = [(i, j)]
+    queue = collections.deque([(i, j)])
+    while queue : 
+        Q = queue.popleft()
+        for loc in Q : 
+            if loc not in discovered : 
+                discovered.append(loc)
+                queue.append(loc)
 dfs(graph, 0, 0)
 print(result)
