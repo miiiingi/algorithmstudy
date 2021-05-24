@@ -9,7 +9,6 @@ for row in range(N) :
 for i in range(N) : 
     for j in range(M) : 
         if graph[i][j] == '1' : 
-            # if (i, j) not in graph_location : 
             if i+1 < 0 or j < 0 or i+1 >= N or j >= M :
                 pass
             else : 
