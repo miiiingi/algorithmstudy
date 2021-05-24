@@ -3,10 +3,9 @@ N, M = map(int, input().split())
 graph = [] 
 graph_location = collections.defaultdict(list)
 check = [] 
-result = 0
 for row in range(N) : 
     graph.append(list(input()))
-    check.append(list([0 for _ in range(M)]))
+    check.append(list([1 for _ in range(M)]))
 for i in range(N) : 
     for j in range(M) : 
         if graph[i][j] == '1' : 
@@ -21,7 +20,7 @@ for i in range(N) :
             else : 
                 if graph[i-1][j] == '1' : 
                     graph_location[(i, j)].append((i-1, j))
-            if i < 0 or j+1< 0 or i+1 >= N or j+1 >= M :
+            if i < 0 or j+1< 0 or i >= N or j+1 >= M :
                 pass
             else : 
                 if graph[i][j+1] == '1' : 
@@ -32,33 +31,19 @@ for i in range(N) :
                 if graph[i][j-1] == '1' : 
                     graph_location[(i, j)].append((i, j-1))
     
-def dfs(graph, i, j) : 
-    if i >= N or j >= M or graph[i][j] == '0' :
-        return
-    if i == (N-1) and j == (M-1) : 
-        return
-    graph[i][j] = '0'
-    check[i][j] += 1
-    # location.append((i, j))
-    if i+1 >= N : 
-        return 
-    else : 
-        check[i+1][j] = check[i][j]
-        dfs(graph, i+1, j)
-    if j+1 >= M :
-        return
-    else :
-        check[i][j+1] = check[i][j]
-        dfs(graph, i, j+1)
-
 def bfs(graph, i, j) : 
+    if i == (N-1) and j == (M-1) : 
+        return 
     discovered = [(i, j)]
     queue = collections.deque([(i, j)])
     while queue : 
-        Q = queue.popleft()
-        for loc in Q : 
-            if loc not in discovered : 
-                discovered.append(loc)
-                queue.append(loc)
-dfs(graph, 0, 0)
-print(result)
+        Q = [queue.popleft()]
+        if graph[Q[0][0]][Q[0][1]] == '1' : 
+            for loc in graph_location[Q[0]] : 
+                if loc not in discovered : 
+                    discovered.append((loc[0], loc[1]))
+                    queue.append((loc[0], loc[1]))
+                    check[loc[0]][loc[1]] += check[Q[0][0]][Q[0][1]]
+            
+bfs(graph, 0, 0)
+print(check[N-1][M-1])
