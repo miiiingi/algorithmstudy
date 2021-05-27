@@ -5,48 +5,41 @@
 import collections
 N, M = map(int,input().split())
 graph = [] 
-graph_location = collections.defaultdict(list)
-# graph_judge = 
 init = [] 
-prohibit = [] 
+check = [] 
 for iter in range(M) : 
     graph.append(list(input().split()))
+    check.append(list([1 for _ in range(N)]))
 # Step 1.
 for i in range(M) : 
     for j in range(N) : 
-        if i-1 >= 0 :
-            graph_location[(i, j)].append((i-1, j))
-        elif i+1 < M :
-            graph_location[(i+1, j)].append((i+1, j))
-        elif j-1 >= 0 :
-            graph_location[(i, j)].append((i, j-1))
-        elif j+1 < N :
-            graph_location[(i+1, j)].append((i, j+1))
-print(graph_location)
-exit()
-def bfs(graph, i, j) :
-    if i < 0 or j < 0 or i >= N or j >= M or graph[j][i] == '-1' :  # 요기서 시간
-        return
-    discovered = [(j, i)]
-    queue = [(j, i)]
+        if graph[i][j] == '1' :
+            init.append((i, j))
+def bfs(graph, start) :
+    queue = collections.deque([])
+    for loc_start in start : 
+        queue.append(loc_start)
     while queue : 
-        Q = queue.pop()
-        if Q[1] > 0 and (Q[0]+1) >0 and Q[1] < N and (Q[0]+1) < M and graph[Q[0]+1][Q[1]] == '0' : 
-            graph[Q[0]+1][Q[1]] = '1'  
-            discovered.append((Q[0]+1,Q[1]))
-        if graph[Q[0]-1][Q[1]] == '0' : 
-            graph[Q[0]-1][Q[1]] = '1'  
-            discovered.append((Q[0]-1,Q[1]))
-        if graph[Q[0]][Q[1]+1] == '0' : 
-            graph[Q[0]][Q[1]+1] = '1'  
-            discovered.append((Q[0],Q[1]+1))
-        if graph[Q[0]][Q[1]-1] == '0' : 
-            graph[Q[0]][Q[1]-1] = '1'  
-            discovered.append((Q[0],Q[1]-1))
+        Q = queue.popleft()
+        candi_coor = [(Q[0]-1, Q[1]), (Q[0]+1, Q[1]), (Q[0], Q[1]-1), (Q[0], Q[1]+1)]
+        for loc in candi_coor :
+            if loc[0] < 0 or loc[1] < 0 or loc[0] >= M or loc[1] >= N or graph[loc[0]][loc[1]] == '-1':
+                continue
+            if graph[loc[0]][loc[1]] == '0' : 
+                graph[loc[0]][loc[1]] = '1'
+                queue.append((loc[0], loc[1]))
+                check[loc[0]][loc[1]] += check[Q[0]][Q[1]]
 
-
-    graph[j][i] = '1'
-    return
-        # Step 4.
-start = init.pop()
-bfs(graph, start[1], start[0])
+bfs(graph, init)
+max_base = 0
+possible = True 
+for i in range(M) : 
+    for j in range(N) : 
+        if graph[i][j] == '0' : 
+            possible = False
+        if check[i][j] > max_base : 
+            max_base = check[i][j]
+if possible : 
+    print(max_base-1)
+else : 
+    print(-1)
