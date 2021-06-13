@@ -7,19 +7,30 @@ import collections
 import heapq
 def solution(jobs) : 
     jobs = collections.deque(sorted(jobs, key = lambda x: x[0]))
+    length = len(jobs)
     stack = False
-    stack_heaq = []
     answer = 0 
     start = 0 
     while jobs : 
+        stack_heaq = []
+        if start < jobs[0][0] : 
+            stack = False
         if not stack : 
             current = jobs.popleft()
-            start += (current[0] - start) + current[1] 
-            answer += current[1]
+            answer += (current[0] - start) + current[1] 
+            start += current[1]
+            stack = True
         else : 
-            pass
-
-        
-    return 
+            for iter in range(len(jobs)) : 
+                stack_heaq.append([(start - jobs[iter][0]) ,jobs[iter]])
+            heapq.heapify(stack_heaq)
+            pops = stack_heaq[0]
+            answer += abs(pops[1][0] - start) + pops[1][1]
+            start += pops[1][1]
+            for job in jobs : 
+                if pops[1][0] == job[0] :
+                    jobs.remove(job)
+                    break
+    return  answer / length 
 answer =solution([[1, 9], [0, 3], [2, 6]])
 print(answer)
