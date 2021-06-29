@@ -50,7 +50,5 @@ def solution(name):
             else:
                 start_num -= loc_min
     return answer
-
-
 answer = solution("ABAAAAAAAAABB")
 print(answer)
