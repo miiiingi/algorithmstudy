@@ -1,20 +1,15 @@
 def solution(number, k):
-    answer = []
-    for ind in range(len(number)-1):
-        if number[ind] >= number[ind+1] : 
-            answer.append(number[ind])
-        else : 
-            while answer and answer[-1] < number[ind+1] : 
-                answer.pop()
-                k -= 1
-            if k == 0 : 
-                answer.append(number[ind+1])
-            else : 
-                k -= 1
+    answer = [number[0]]
+    for num in number[1: ]:
+        while answer and answer[-1] < num and k > 0 :
+            answer.pop()
+            k -= 1
+        answer.append(num)
+    if k != 0 :
+        answer.pop()
+    return ''.join(answer)
 
-
-
-answer = solution("817", 1)
+answer = solution("77777", 1)
 print(answer)
 # def solution(number, k) : 
 #     answer = ''
