@@ -3,22 +3,21 @@ def solution(tickets) :
     graph = collections.defaultdict(list)
     for start, end in tickets : 
         graph[start].append(end)
+    try : 
         for k in graph.keys() : 
             graph[k] = sorted(graph[k])
+            graph[k] = sorted(graph[k], key = lambda x : (1 if k in graph[x] else 0), reverse=True)
+    except : 
+        pass
     # graph['ICN'] = sorted(graph['ICN'], key = lambda x : 1 if 'ICN' in graph[x] else 0, reverse=True)
     def dfs(v, visited = []) : 
         visited.append(v)
         for node in graph[v] : 
             graph[v].remove(node)
-            graph[v].append(node)
             visited = dfs(node, visited)
-    # 돌아돌아서 자신이 나오는 순서대로 정렬
         return visited
-    while True : 
-        visited = dfs('ICN') 
-        if len(visited) == len(tickets) + 1 : 
-            return visited
-
+    visited = dfs('ICN') 
+    return visited
 # answer = solution([['ICN','SFO'], ['SFO', 'ICN'], ['ICN', 'SFO'], ['SFO', 'QRE']])
 # 돌아오는 ICN이 우선순위가 되어야 갇혀 있지 않을 수 있음
 # answer = solution([['ICN','B'], ['B', 'ICN'], ['ICN', 'A'], ['A', 'D'], ['D', 'A']])
