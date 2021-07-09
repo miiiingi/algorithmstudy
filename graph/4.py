@@ -1,22 +1,23 @@
 import collections
 def solution(tickets) : 
-    graph = collections.defaultdict(list)
+    graph = collections.defaultdict(collections.deque)
     for start, end in tickets : 
         graph[start].append(end)
-    try : 
-        for k in graph.keys() : 
-            graph[k] = sorted(graph[k])
-            graph[k] = sorted(graph[k], key = lambda x : (1 if k in graph[x] else 0), reverse=True)
-    except : 
-        pass
-    # graph['ICN'] = sorted(graph['ICN'], key = lambda x : 1 if 'ICN' in graph[x] else 0, reverse=True)
-    def dfs(v, visited = []) : 
+    def dfs(v, visited) : 
         visited.append(v)
-        for node in graph[v] : 
-            graph[v].remove(node)
-            visited = dfs(node, visited)
-        return visited
-    visited = dfs('ICN') 
+        while graph[v] : 
+            node = graph[v].popleft()
+            dfs(node, visited)
+            if len(visited) != len(tickets) + 1 : 
+                graph[v].append(node)
+        if len(visited) == len(tickets) + 1 : 
+            return
+        else:
+            visited.pop()
+    for k in graph.keys() : 
+        graph[k] = collections.deque(sorted(graph[k]))
+    visited = []
+    dfs('ICN', visited) 
     return visited
 # answer = solution([['ICN','SFO'], ['SFO', 'ICN'], ['ICN', 'SFO'], ['SFO', 'QRE']])
 # 돌아오는 ICN이 우선순위가 되어야 갇혀 있지 않을 수 있음

@@ -1,10 +1,11 @@
 import collections
+import sys
 iter = int(input())
 for i in range(iter):
     answer = 0 
-    number_student = int(input())
+    number_student = int(sys.stdin.readline())
     couple = []
-    for x in map(int, input().split()):
+    for x in map(int, sys.stdin.readline().split()):
         couple.append(x)
     graph = collections.defaultdict(int)
     for m, c in zip(range(number_student), couple):
