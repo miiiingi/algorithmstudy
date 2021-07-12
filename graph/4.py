@@ -1,6 +1,4 @@
 import collections
-
-
 def solution(tickets):
     graph = collections.defaultdict(collections.deque)
     for start, end in tickets:
