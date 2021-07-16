@@ -1,5 +1,4 @@
 import collections
-import heapq
 def solution(n, edge):
     answer = 0 
     graph = collections.defaultdict(list)
@@ -7,16 +6,17 @@ def solution(n, edge):
         graph[e[0]].append(e[1])
         graph[e[1]].append(e[0])
     visited = collections.defaultdict(int)
-    Q = [(1, 0)]
+    Q = collections.deque([(1, 0)])
     while Q:
-        node, cost = heapq.heappop(Q)
+        node, cost = Q.popleft()
         if node not in visited:
             visited[node] = cost
             for node2 in graph[node]:
-                heapq.heappush(Q, (node2, cost + 1))
+                Q.append((node2, cost + 1))
     for value in visited.values() : 
         if max(visited.values()) == value : 
             answer += 1
+    print(graph)
     return answer 
 
 
