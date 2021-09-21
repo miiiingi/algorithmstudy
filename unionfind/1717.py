@@ -1,12 +1,17 @@
-import collections
 import sys
+sys.setrecursionlimit(10**6)
+n, m = map(int,sys.stdin.readline().split())
+nodes = [0] * (n+1)
+for node in range(n+1) :
+    nodes[node] = node
+
 def union(a, b) : 
     parent_a, parent_b = find(a), find(b)
     if parent_a != parent_b : 
-        if a > b : 
-            nodes[b] = a
-        elif a < b : 
-            nodes[a] = b
+        if parent_a > parent_b : 
+            nodes[parent_a] = parent_b
+        elif parent_a < parent_b : 
+            nodes[parent_b] = parent_a
 
 def find(number) : 
     if nodes[number] == number : 
@@ -15,12 +20,8 @@ def find(number) :
         nodes[number] = find(nodes[number])
         return nodes[number]
 
-n, m = map(int,sys.stdin.readline().rstrip().split())
-nodes = collections.defaultdict(int)
-for node in range(m+1) :
-    nodes[node] = node
 for iter in range(m) : 
-    operation, a, b = map(int,sys.stdin.readline().rstrip().split())
+    operation, a, b = map(int,sys.stdin.readline().split())
     if operation == 0 : 
         union(a, b)
     elif operation == 1 : 
@@ -29,3 +30,4 @@ for iter in range(m) :
             print('YES')
         else: 
             print('NO')
+    print(nodes)
