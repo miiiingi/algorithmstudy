@@ -14,26 +14,31 @@ def union(start, end) :
     if parent_start != parent_end : 
         if parent_start < parent_end : 
             friends[parent_end] = parent_start
-            return parent_start
+            for friend in friends.keys() : 
+                if friends[friend] == parent_end : 
+                    friends[friend] = parent_start
+            return parent_start  
         elif parent_start > parent_end : 
             friends[parent_start] = parent_end
-            return parent_end
+            for friend in friends.keys() : 
+                if friends[friend] == parent_start : 
+                    friends[friend] = parent_end
+            return parent_end  
 N = int(input())
 for _ in range(N) :
-    answer = 0 
     friends = collections.defaultdict(str)
     num_friends = int(input())
     for n in range(num_friends) : 
+        answer = 0 
         f1, f2 = input().split()
         if f1 not in friends : 
             friends[f1] = f1
         if f2 not in friends : 
             friends[f2] = f2
         p = union(f1, f2)
-        for k in friends.keys() : 
-            v = find(k)
+        for v in friends.values() :
             if v == p : 
                 answer += 1
-        print(answer) 
+        print(answer)
     
 
