@@ -16,7 +16,7 @@ for ind, elem in enumerate(array) :
     while stack and stack[-1] < elem : 
         answer[ind - 1] = elem
         break
-    stack.append(elem)
+    stack.append((ind, elem))
 print(*answer)
 
 
