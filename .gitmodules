@@ -1,0 +1,3 @@
+[submodule "naverwebtoon/naverwebtoon/doit_pandas"]
+	path = naverwebtoon/naverwebtoon/doit_pandas
+	url = https://github.com/easysIT/doit_pandas.git
