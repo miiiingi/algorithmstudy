@@ -12,5 +12,6 @@ scientists = pd.DataFrame(
 # print(scientists.iloc[0, :])
 # print(scientists['Age'].isin([37]))
 scientists = scientists.drop('mingi' , axis= 0) # index에 특정 이름을 정하면, drop method로도 삭제 가능 !
+print(scientists)
 scientists.to_csv('scientists.csv')
 scientists2 = pd.read_csv('scientists.csv', index_col= 'Unnamed: 0')

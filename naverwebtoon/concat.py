@@ -11,5 +11,5 @@ row_new = pd.DataFrame(data = {
     'C' : ['n3'],
     'D' : ['n4']
 })
-row_concat = pd.concat([row_concat, row_new], ignore_index = True)
-print(pd.concat([df1, df3], axis= 0, join = 'inner'))
+row_concat = pd.concat([row_concat, row_new], ignore_index = False)
+print(row_concat)

@@ -21,6 +21,8 @@ weather_tidy = weather_long.pivot_table(
     values='temp',
     dropna=False
 )
+print(weather)
+print(weather_long)
+print(weather_tidy)
+print(weather_tidy.iloc[:15, :])
 weather_tidy = weather_tidy.reset_index()
-
-print(billboard_long.loc[billboard_long['track'] == 'Loser', :])
