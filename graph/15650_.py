@@ -6,8 +6,7 @@ def dfs(init, numlist, M, visited):
     if len(visited) == M:
         result.append(visited[:])
         return
-    numlist_ = numlist[:]
-    numlist_.remove(init)
+    numlist_ = numlist[init:]
     for num in numlist_:
         dfs(num, numlist_, M, visited)
         visited.pop()
@@ -19,6 +18,3 @@ for r in result :
         strs += f'{str(x)} '
     strs = strs.strip()
     print(strs)
-
-
-
