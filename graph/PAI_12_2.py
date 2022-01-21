@@ -1,6 +1,7 @@
 class Solution:
     def letterCombinations(self, digits: str):
         answer = list()
+        accum = list()
         letters = {
             "2": "abc",
             "3": "def",
@@ -11,22 +12,25 @@ class Solution:
             "8": "tuv",
             "9": "wxyz",
         }
-        length = len(digits)
-        accum = list()
-
-        def dfs(digits, accum):
-            if len(accum) == length:
+        def dfs(numbers, accum):
+            if len(accum) == len(digits):
                 answer.append(accum[:])
-                accum.pop()
                 return
-            for ind, digit in enumerate(digits):
+            for ind, digit in enumerate(numbers):
                 for let in letters[digit]:
                     accum.append(let)
-                    dfs(digits[ind + 1 :], accum)
-                accum.pop()
-
+                    dfs(numbers[ind + 1 :], accum)
+                    accum.pop()
         dfs(digits, accum)
-        print(answer)
+        answer_ = list()
+        for word in answer :
+            accum = ''
+            for w in word : 
+                accum += w
+            answer_.append(accum)
+        print(answer_) 
+
+
 
 
 sol = Solution()
