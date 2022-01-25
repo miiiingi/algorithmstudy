@@ -12,8 +12,6 @@ class Solution:
             if not pops[1] in accum :
                 # 순수하게 단일 경로에 대한 비용만 계산 > 순환하는 구조에서 이용될 수 있음
                 accum[pops[1]] = pops[0]
-                # if set(visited) == set(graph.keys()):
-                #     return pops[0]
                 for g in graph[pops[1]]:
                     heapq.heappush(que, (g[0] + pops[0], g[1]))
         if len(accum.keys()) == n :
